@@ -40,7 +40,7 @@
         	]]>
  	</select>
  	<!-- 3강 1-3 문제 -->
- 	<select id="selectRealEstateByAreaPrice" parameterType="hashmap" resultType="com.quiz.lesson03.domain.RealEstate">
+ 	<select id="selectRealEstateByAreaPrice" parameterType="map" resultType="com.quiz.lesson03.domain.RealEstate">
  		SELECT
  			`id`
 			,`realtorId`
@@ -55,11 +55,63 @@
 			`real_estate`
 		WHERE
 			<![CDATA[
-        	`price` <= #{arg1} && `area` >= #{arg0}
+        	`area` >= #{area}
+        	AND `price` <= #{price} 
+        	AND `type`='매매'
         	]]>
-        	and `type`='매매'
         ORDER BY
         	`id`
         DESC
  	</select>
+ 	
+ 	<insert id="insertRealEstate" parameterType="com.quiz.lesson03.domain.RealEstate">
+ 	INSERT INTO `real_estate`
+ 	(
+ 		`realtorId`
+		,`address`
+		,`area`
+		,`type`
+		,`price`
+		,`rentPrice`
+		,`createdAt`
+		,`updatedAt`
+ 	)
+ 	VALUES
+ 	(
+ 		#{realtorId},
+ 		#{address},
+ 		#{area},
+ 		#{type},
+ 		#{price},
+ 		#{rentPrice},
+ 		NOW(),
+ 		NOW()
+ 	)
+ 	
+ 	</insert>
+ 	
+ 	<insert id="insertRealEstateByRealtorId" parameterType="map">
+ 	INSERT INTO `real_estate`
+ 	(
+ 		`realtorId`
+		,`address`
+		,`area`
+		,`type`
+		,`price`
+		,`rentPrice`
+		,`createdAt`
+		,`updatedAt`
+ 	)
+ 	VALUES
+ 	(
+ 		#{realtorId},
+ 		#{address},
+ 		#{area},
+ 		#{type},
+ 		#{price},
+ 		#{rentPrice},
+ 		NOW(),
+ 		NOW()
+ 	)	
+ 	</insert>
  </mapper>

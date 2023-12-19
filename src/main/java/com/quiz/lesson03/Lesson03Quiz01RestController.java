@@ -38,12 +38,12 @@ public class Lesson03Quiz01RestController {
 	
 	// url: http://localhost:8010/lesson03/quiz01/3
 	// url: http://localhost:8010/lesson03/quiz01/3?area=90&price=130000
+	// input: area, price     output:List<RealEstate> [] or 채워져있는 리스트 (null일 수 없다.)
 	@RequestMapping("/3")
 	public List<RealEstate> quiz01_3(
 			@RequestParam(value = "area", defaultValue = "50") int area
 			,@RequestParam(value="price", defaultValue = "70000") int price){
 		return realEstateBO.getRealEstateByAreaPrice(area, price);
 	}
-	
 		
 }
