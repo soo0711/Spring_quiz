@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.quiz.lesson03.domain.RealEstate;
 import com.quiz.lesson03.mapper.RealEstateMapper;
@@ -42,5 +41,17 @@ public class RealEstateBO {
 	public int addRealEstateByRealtorId(int realtorId, String address, int area, String type
 			, int price, int rentPrice) {
 		return realEstateMapper.insertRealEstateByRealtorId(realtorId, address, area, type, price, rentPrice);
+	}
+	
+	// input: id, type, price
+	// output: 성공 행의 개수
+	public int updateRealEstateById(int id, String type, int price) {
+		return realEstateMapper.updateRealEstateById(id, type, price);
+	}
+	
+	// input: id
+	// output: 성공 행의 개수
+	public int deleteRealEstateById(int id) {
+		return realEstateMapper.deleteRealEstateById(id);
 	}
 }
