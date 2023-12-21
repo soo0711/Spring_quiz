@@ -19,7 +19,7 @@ public class Lesson04Quiz01Controller {
 	private SellerBO sellerBO;
 	
 	// 판매자 추가 화면
-	// url: http://localhost:8080/lesson04/quiz01/add-seller-view
+	// url: http://localhost:8010/lesson04/quiz01/add-seller-view
 	@RequestMapping("/add-seller-view")
 	public String addSellerView(){
 		return "lesson04/addSeller";
