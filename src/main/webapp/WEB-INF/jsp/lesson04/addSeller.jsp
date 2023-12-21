@@ -21,6 +21,7 @@
 <body>
 	<div class="container">
 		<h1>판매자 추가</h1>
+		<!-- insert 방식이면 보통 post -->
 		<form method="post" action="/lesson04/quiz01/add-seller">
 			<div class="form-group">
 				<label for="nickname">닉네임</label>
@@ -31,7 +32,7 @@
 				<input type="text" class="form-control" name="profileImageUrl" id="profileImageUrl">
 			</div>
 			<div class="form-group">
-				<label for="temperature">온도</label>
+				<label for="temperature">매너온도</label>
 				<input type="text" class="form-control col-3" name="temperature" id="temperature">
 			</div>
 			

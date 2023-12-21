@@ -14,13 +14,17 @@ public class SellerBO {
 	
 	// input: parameters
 	// output: X
-	public void addSeller(String nickname, String profileImageUrl, Double temperature) {
+	public void addSeller(String nickname, String profileImageUrl, double temperature) {
 		 sellerMapper.insertSeller(nickname, profileImageUrl, temperature);
 	}
 	
-	// input: X
-	// output: Seller
+	// input: id
+	// output: Seller(or null)
 	public Seller getLatestSeller() {
 		return sellerMapper.selectLatestSeller();
+	}
+	
+	public Seller getSellerById(int id) {
+		return sellerMapper.selectSellerById(id);
 	}
 }

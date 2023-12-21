@@ -21,9 +21,11 @@
 <body>
 	<div class="container">
 		<h1>${title}</h1>
-		<img src="${result.profileImageUrl}" width=100>
-		<div class="display-4">${result.nickname}</div>
-		<h3 class="text-warning">${result.temperature}</h3>
+		<div>
+			<img src="${seller.profileImageUrl}" width="300" alt="판매자 이미지">
+		</div>
+		<div class="display-3">${seller.nickname}</div>
+		<div class="text-warning font-weight-bold display-4">${seller.temperature}</div>
 	</div>
 </body>
 </html>

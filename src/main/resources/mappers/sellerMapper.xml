@@ -8,10 +8,10 @@
  		INSERT INTO `seller`
  		(
 		    `nickname`
-		    ,`profileImageUrl`
-		    ,`temperature`
-		    ,`createdAt`
-		    ,`updatedAt
+			,`profileImageUrl`
+			,`temperature`
+			,`createdAt`
+			,`updatedAt`
  		)
  		VALUES
  		(
@@ -29,7 +29,7 @@
 		    ,`profileImageUrl`
 		    ,`temperature`
 		    ,`createdAt`
-		    ,`updatedAt
+		    ,`updatedAt`
 		FROM
 			`seller`
 		ORDER BY `id`
@@ -37,4 +37,16 @@
 		LIMIT 1
  	</select>
  
+ 	<select id="selectSellerById" parameterType="int" resultType="com.quiz.lesson04.domain.Seller">
+	 	SELECT
+	 	 	`nickname`
+		    ,`profileImageUrl`
+		    ,`temperature`
+		    ,`createdAt`
+		    ,`updatedAt`
+		FROM
+			`seller`
+		WHERE
+			id = #{id}
+ 	</select>
  </mapper>
