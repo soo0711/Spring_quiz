@@ -21,7 +21,7 @@
 <body>
 	<div class="container">
 		<h1>공인중개사 추가</h1>
-		<form method="post" action="/lesson04/add_realtor">
+		<form method="post" action="/lesson04/quiz02/add-realtor">
 			<div class="form-group">
 				<label for="office">상호명</label>
 				<input type="text" class="form-control col-6" name="office" id="office">

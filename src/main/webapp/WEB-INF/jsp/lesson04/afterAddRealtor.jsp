@@ -20,27 +20,27 @@
 </head>
 <body>
 	<div class="container">
-		<h1>공인중개사 정보</h1>
+		<h1>${title}</h1>
 		<table class="table">
 			<tr>
 				<th>ID</th>
-				<td>${}</td>
+				<td>${realtor.id}</td>
 			</tr>
 			<tr>
 				<th>상호명</th>
-				<td>${}</td>
+				<td>${realtor.office}</td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<td>${}</td>
+				<td>${realtor.phoneNumber}</td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td>${}</td>
+				<td>${realtor.address}</td>
 			</tr>
 			<tr>
 				<th>등급</th>
-				<td>${}</td>
+				<td>${realtor.grade}</td>
 			</tr>
 		</table>
 	</div>
