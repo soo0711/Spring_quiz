@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Quiz03</title>
+<title>Quiz04</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
 	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
@@ -22,48 +23,36 @@
 </head>
 <body>
 	<div class="container">
-		<h1>1. 후보자 득표율</h1>
+		<h1>회원 정보 리스트</h1>
 		<table class="table text-center">
 			<thead>
 				<tr>
-					<th>기호</th>
-					<th>득표 수</th>
-					<th>득표 율</th>
+					<th>No</th>
+					<th>이름</th>
+					<th>전화번호</th>
+					<th>국적</th>
+					<th>이메일</th>
+					<th>자기소개</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${candidates }" var="candidate" varStatus="status">
+				<c:forEach items="${members }" var="member" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
-					<td><fmt:formatNumber value="${candidate }"/></td>
-					<td><fmt:formatNumber value="${candidate / 1000000 }" type="percent"/> </td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		
-		<br>
-		
-		<h1>2. 카드명세서</h1>
-		<table class="table text-center">
-			<thead>
-				<tr>
-					<th>사용처</th>
-					<th>가격</th>
-					<th>사용 날짜</th>
-					<th>할부</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${cardBills }" var="cardBill"> 
-				<tr>
-					<td>${cardBill.store }</td>
-					<td><fmt:formatNumber type="currency" value="${cardBill.pay }"/> </td>
+					<td>${member.name }</td>
 					<td>
-					<fmt:parseDate value="${cardBill.date }" pattern="yyyy-MM-dd" var="pattern1" /> 
-					<fmt:formatDate value="${pattern1 }" pattern="yyyy년 M월 dd일" />
+					<c:choose>
+						<c:when items=${fn:startsWith(member.phoneNumber, '010') }>
+							<td>${member.phoneNumber }</td>
+						</c:when>
+						<c:otherwise>
+							유효하지 않은 전화번호 
+						</c:otherwise>
+					</c:choose>
 					</td>
-					<td>${cardBill.installment }</td> 
+					<td>${member.nationality }</td>
+					<td>${member.email }</td>
+					<td>${member.introduce }</td>
 				</tr>
 				</c:forEach>
 			</tbody>
