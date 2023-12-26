@@ -42,17 +42,28 @@
 					<td>${member.name }</td>
 					<td>
 					<c:choose>
-						<c:when items=${fn:startsWith(member.phoneNumber, '010') }>
-							<td>${member.phoneNumber }</td>
+						<c:when test="${fn:startsWith(member.phoneNumber, '010') }">
+							${member.phoneNumber }
 						</c:when>
 						<c:otherwise>
 							유효하지 않은 전화번호 
 						</c:otherwise>
 					</c:choose>
 					</td>
-					<td>${member.nationality }</td>
-					<td>${member.email }</td>
-					<td>${member.introduce }</td>
+					<td>${fn:replace(member.nationality, '삼국시대', '삼국 -')}</td>
+					<td>
+						<span class="font-weight-bold">${fn:split(member.email, '@')[0]}</span><span>@${fn:split(member.email, '@')[1]}</span>
+					</td>
+					<td>
+					<c:choose>
+						<c:when test="${fn:length(member.introduce) > 15 }">
+							<span>${fn:substring(member.introduce, 0, 15)} ...</span>
+						</c:when>
+						<c:otherwise>
+							${member.introduce}
+						</c:otherwise>
+					</c:choose>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>
