@@ -47,12 +47,12 @@
 						</c:when>
 						<c:otherwise>
 							유효하지 않은 전화번호 
-						</c:otherwise>
+						</c:otherwise> 
 					</c:choose>
 					</td>
 					<td>${fn:replace(member.nationality, '삼국시대', '삼국 -')}</td>
 					<td>
-						<span class="font-weight-bold">${fn:split(member.email, '@')[0]}</span><span>@${fn:split(member.email, '@')[1]}</span>
+						<b>${fn:split(member.email, '@')[0]}</b>@${fn:split(member.email, '@')[1]}
 					</td>
 					<td>
 					<c:choose>
