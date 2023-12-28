@@ -32,7 +32,7 @@
 			<div class="display-4 py-4">우리동네 가게</div>
 			<c:forEach items="${storeList }" var="store">
 			<div class="border border-info p-3 mb-4">
-			<a href="#" class="text-dark">
+			<a href="/store/store-review-view?storeId=${store.id }&storeName=${store.name }" class="text-dark">
 				<h3 class="font-weight-bold">${store.name }</h3>
 				<div>전화번호: ${store.phoneNumber }</div>
 				<div>주소: ${store.address }</div>

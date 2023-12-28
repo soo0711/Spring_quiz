@@ -13,5 +13,9 @@ footer {
 }
 
 .contents {
-	min-height: 500px;
+	min-height: 300px;
+}
+
+.menu-color{
+	background-color: #C0C0C0;
 }

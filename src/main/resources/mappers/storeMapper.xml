@@ -5,11 +5,28 @@
  <mapper namespace="com.quiz.lesson02.mapper.StoreMapper">
  	<select id="selectStoreList" resultType="com.quiz.lesson02.domain.Store">
 		SELECT
-			`name`
+			`id`
+			,`name`
 			,`phoneNumber`
 			,`address`
 		FROM
 			`store`
+ 	</select>
+ 	
+ 	<select id="selectStoreListById" parameterType="int" resultType="com.quiz.store.domain.Review">
+		SELECT
+			`id`
+			,`storeId`
+			,`menu`
+			,`userName`
+			,`point`
+			,`review`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`new_review`
+		WHERE 
+			`storeId` =  ${storeId}
  	</select>
  	
  </mapper>
