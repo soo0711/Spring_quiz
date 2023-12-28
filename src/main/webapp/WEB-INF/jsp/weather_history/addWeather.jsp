@@ -28,55 +28,94 @@
 					<a href="/weather-history/weather-list-view" class="text-white font-weight-bold">기상청</a>
 				</div>
 				<nav>
-					<ul class="nav flex-column">
-						<li class="nav-item font-weight-bold"><a href="/weather-history/weather-list-view" class="nav-link text-white font-weight-bold">날씨</a></li>
-						<li class="nav-item font-weight-bold"><a href="/weather-history/add-weather-view" class="nav-link text-white font-weight-bold">날씨입력</a></li>
-						<li class="nav-item font-weight-bold"><a href="#" class="nav-link text-white font-weight-bold">테마날씨</a></li>
-						<li class="nav-item font-weight-bold"><a href="#" class="nav-link text-white font-weight-bold">관측 기후</a></li>
+					<ul class="nav flex-column mt-4">
+						<li class="nav-item">
+							<a href="/weather-history/weather-list-view" class="nav-link menu-font">날씨</a>
+						</li>
+						<li class="nav-item">
+							<a href="/weather-history/add-weather-view" class="nav-link menu-font">날씨입력</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link menu-font">테마날씨</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link menu-font">관측 기후</a>
+						</li>
 					</ul>
 				</nav>
 			</aside>
-			<section id="cotent1" class="col-10 bg-secondary">
-				<div class="mx-5 my-4">
-					<h2>날씨 입력</h2>
-					<form method="post" action="/weather-history/add-weather">
-						<div class="d-flex justify-content-around">
-							<div class="d-flex">
-								<label for="datepicker">날짜 </label>
-								<script>
-								$(document).ready(function() {
-					                $("#datepicker").datepicker({
-					                    dateFormat:"yy-mm-dd" // 2023-11-10
-					                });
-					            });
-								</script>
-								<input type="text" class="form-control col-8 ml-2" name="date" id="datepicker">
-							</div>
-							<div class="d-flex">
-								<label for="weather">날씨 </label>
-								<input type="text" class="form-control col-4 ml-2" name="weather" id="weather">
-							</div>
-							<div class="d-flex">
-								<label for="microDust">미세먼지 </label>
-								<input type="text" class="form-control col-4 ml-2" name="microDust" id="microDust">
+			<section class="col-10 mt-3 ml-5">
+				<h3>날씨 입력</h3>
+				<form action="/weather-history/add-weather" method="post">
+					<div class="d-flex justify-content-between mt-5">
+						<div class="d-flex align-items-center">
+							<div class="input-label">날짜</div>
+							<script>
+							$(document).ready(function() {
+								// 날짜 선택
+								$("#date").datepicker({
+										dateFormat: "yy-mm-dd"
+								});
+							});
+							</script>
+							<input type="text" class="form-control" id="date" name="date">
+						</div>
+						<div class="d-flex align-items-center">
+							<div class="input-label">날씨</div>
+							<select class="form-control" name="weather">
+								<option>맑음</option>
+								<option>구름조금</option>
+								<option>흐림</option>
+								<option>비</option>
+							</select>
+						</div>
+
+						<div class="d-flex align-items-center">
+							<div class="input-label">미세먼지</div>
+							<select class="form-control" name="microDust">
+								<option>좋음</option>
+								<option>보통</option>
+								<option>나쁨</option>
+								<option>최악</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="d-flex justify-content-between mt-5">
+						<div class="d-flex align-items-center">
+							<div class="input-label">기온</div>
+							<div class="input-group">
+								<input type="text" class="form-control" name="temperatures">
+								<div class="input-group-append">
+									<span class="input-group-text">℃</span>
+								</div>
 							</div>
 						</div>
-						<div class="d-flex justify-content-between">
-							<div class="d-flex">
-								<label for="temperatures">기온 </label>
-								<input type="text" class="form-control col-4 ml-2" name="temperatures" id="temperatures">
-							</div>
-							<div class="d-flex">
-								<label for="precipitation">강수량 </label>
-								<input type="text" class="form-control col-4 ml-2" name="precipitation" id="precipitation">
-							</div>
-							<div class="d-flex">
-								<label for="windSpeed">풍속 </label>
-								<input type="text" class="form-control col-4 ml-2" name="windSpeed" id="windSpeed">
+						<div class="d-flex align-items-center">
+							<div class="input-label">강수량</div>
+							<div class="input-group">
+								<input type="text" class="form-control" name="precipitation">
+								<div class="input-group-append">
+									<span class="input-group-text">mm</span>
+								</div>
 							</div>
 						</div>
-					</form>
-				</div>
+
+						<div class="d-flex align-items-center">
+							<div class="input-label">풍속</div>
+							<div class="input-group">
+								<input type="text" class="form-control" name="windSpeed">
+								<div class="input-group-append">
+									<span class="input-group-text">km/h</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="text-right mt-4 mb-5">
+						<input type="submit" class="btn btn-success" value="저장">
+					</div>
+				</form>
 			</section>
 		</div>
 		<footer class="d-flex align-items-center">

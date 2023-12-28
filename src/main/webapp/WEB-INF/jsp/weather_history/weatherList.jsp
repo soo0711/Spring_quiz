@@ -33,11 +33,19 @@
 					<a href="/weather-history/weather-list-view" class="text-white font-weight-bold">기상청</a>
 				</div>
 				<nav>
-					<ul class="nav flex-column">
-						<li class="nav-item font-weight-bold"><a href="/weather-history/weather-list-view" class="nav-link text-white font-weight-bold">날씨</a></li>
-						<li class="nav-item font-weight-bold"><a href="/weather-history/add-weather-view" class="nav-link text-white font-weight-bold">날씨입력</a></li>
-						<li class="nav-item font-weight-bold"><a href="#" class="nav-link text-white font-weight-bold">테마날씨</a></li>
-						<li class="nav-item font-weight-bold"><a href="#" class="nav-link text-white font-weight-bold">관측 기후</a></li>
+					<ul class="nav flex-column mt-4">
+						<li class="nav-item">
+							<a href="/weather-history/weather-list-view" class="nav-link menu-font">날씨</a>
+						</li>
+						<li class="nav-item">
+							<a href="/weather-history/add-weather-view" class="nav-link menu-font">날씨입력</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link menu-font">테마날씨</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link menu-font">관측 기후</a>
+						</li>
 					</ul>
 				</nav>
 			</aside>
@@ -58,7 +66,7 @@
 						<tbody>
 							<c:forEach items="${lists }" var="list">
 							<tr>
-								<td>${list.date }</td>
+								<td><fmt:formatDate value="${list.date}" pattern="yyyy년 M월 dd일" /></td>
 								<td>
 								<c:choose>
 									<c:when test="${list.weather eq '맑음'}">
