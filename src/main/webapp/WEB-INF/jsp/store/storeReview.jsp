@@ -30,58 +30,54 @@
 		</header>
 		<div class="contents">
 			<div class="display-4 py-4">${storeName }-리뷰</div>
-			<c:choose>
-				<c:when test="${not empty reviews }">
-					<c:forEach items="${reviews }" var="review">
-						<div class="border border-info p-3 mb-4">
-							<div>
-								<span class="font-weight-bold">${review.userName }</span>
-								<c:set var="value" value="${review.point }" />
+			<c:forEach items="${reviews }" var="review">
+				<div class="border border-info p-3 mb-4">
+					<div>
+						<span class="font-weight-bold">${review.userName }</span>
+						<c:set var="value" value="${review.point }" />
+						<c:choose>
+							<c:when test="${not empty review.point }">
 								<c:choose>
-									<c:when test="${not empty review.point }">
-										<c:choose>
-											<%-- 0.5 --%>
-											<c:when test="${(review.point * 10) % 10 eq 5}">
-												<c:forEach begin="1" end="${review.point }" step="1">
-													<img src="/img/star_fill.png" alt="별 한개" width="15">
-												</c:forEach>
-												<img src="/img/star_half.png" alt="별 반개" width="15">
-												<c:forEach begin="${review.point + 1 }" end="4" step="1"
-													varStatus="status">
-													<img src="/img/star_empty.png" alt="별 없음" width="15">
-												</c:forEach>
-											</c:when>
-											<%--0.0 --%>
-											<c:when test="${(review.point * 10) % 10 ne 5}">
-												<c:forEach begin="1" end="${review.point }" step="1">
-													<img src="/img/star_fill.png" alt="별" width="15">
-												</c:forEach>
-												<c:forEach begin="${review.point }" end="4" step="1"
-													varStatus="status">
-													<img src="/img/star_empty.png" alt="별 없음" width="15">
-												</c:forEach>
-											</c:when>
-										</c:choose>
-									</c:when>
-									<c:otherwise>
-										<c:forEach begin="1" end="5" step="1">
+									<%-- 0.5 --%>
+									<c:when test="${(review.point * 10) % 10 eq 5}">
+										<c:forEach begin="1" end="${review.point }" step="1">
+											<img src="/img/star_fill.png" alt="별 한개" width="15">
+										</c:forEach>
+										<img src="/img/star_half.png" alt="별 반개" width="15">
+										<c:forEach begin="${review.point + 1 }" end="4" step="1"
+											varStatus="status">
 											<img src="/img/star_empty.png" alt="별 없음" width="15">
 										</c:forEach>
-									</c:otherwise>
+									</c:when>
+									<%--0.0 --%>
+									<c:when test="${(review.point * 10) % 10 ne 5}">
+										<c:forEach begin="1" end="${review.point }" step="1">
+											<img src="/img/star_fill.png" alt="별" width="15">
+										</c:forEach>
+										<c:forEach begin="${review.point }" end="4" step="1"
+											varStatus="status">
+											<img src="/img/star_empty.png" alt="별 없음" width="15">
+										</c:forEach>
+									</c:when>
 								</c:choose>
-							</div>
-							<small class="text-secondary"> <fmt:formatDate
-									value="${review.createdAt}" pattern="yyyy년 M월 dd일" />
-							</small>
-							<div class="my-2">${review.review }</div>
-							<span class="menu-color rounded">${review.menu }</span>
-						</div>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<h1 class="text-center font-weight-bold mt-4">작성된 리뷰가 없습니다.</h1>
-				</c:otherwise>
-			</c:choose>
+							</c:when>
+							<c:otherwise>
+								<c:forEach begin="1" end="5" step="1">
+									<img src="/img/star_empty.png" alt="별 없음" width="15">
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<small class="text-secondary"> <fmt:formatDate
+							value="${review.createdAt}" pattern="yyyy년 M월 dd일" />
+					</small>
+					<div class="my-2">${review.review }</div>
+					<span class="menu-color rounded">${review.menu }</span>
+				</div>
+			</c:forEach>
+			<c:if test="${empty reviews }">
+				<h1 class="text-center font-weight-bold mt-4">작성된 리뷰가 없습니다.</h1>
+			</c:if>
 		</div>
 		<footer
 			class="pl-4 border-top d-flex align-items-center border-secondary">
