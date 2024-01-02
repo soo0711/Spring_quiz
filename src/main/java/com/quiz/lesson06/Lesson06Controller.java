@@ -1,6 +1,8 @@
 package com.quiz.lesson06;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,32 +17,40 @@ import com.quiz.lesson06.bo.BookmarkBO;
 import com.quiz.lesson06.domain.Bookmark;
 
 @Controller
-@RequestMapping("/lesson06/quiz01")
-public class Lesson06Quiz01Controller {
+@RequestMapping("/lesson06")
+public class Lesson06Controller {
 
 	@Autowired
 	private BookmarkBO bookmarkBO;
 	
 	// 즐겨찾기 입력 화면
-	@GetMapping("/add-bookmark-view")
+	@GetMapping("/quiz01/add-bookmark-view")
 	public String addBookmarkView() {
 		return "lesson06/addBookmark";
 	}
 	
+	
+	// 입력 수행 - AJAX 통신 요청 => (응답값 String - 성공이라고 보내기) / 응답값 JSON String
 	@ResponseBody
-	@PostMapping("/add-bookmark")
-	public String addBookmark(
+	@PostMapping("/quiz01/add-bookmark")
+	public Map<String, Object> addBookmark(
 			@RequestParam("name") String name,
 			@RequestParam("url") String url) {
 		
 		//insert
 		bookmarkBO.addBookmark(name, url);
 		
+		// "{"code":200, "result:"성공"}"
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		
 		// ajax로 보내기
-		return "성공";
+		return result; // map => JSON String
 	}
 	
-	@GetMapping("/bookmark-list")
+	// 즐겨찾기 목록 화면 
+	@GetMapping("/quiz01//bookmark-list")
 	public String bookmarkList(
 			Model model) {
 		

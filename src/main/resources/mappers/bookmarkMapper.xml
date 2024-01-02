@@ -18,7 +18,7 @@
 		,NOW()
 		,NOW()
 		)
-	</insert>
+	</insert> 
 
 	<select id="selectBookmark" resultType="com.quiz.lesson06.domain.Bookmark">
 		SELECT
