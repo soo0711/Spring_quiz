@@ -30,4 +30,13 @@
 		FROM
 			`bookmark`
 	</select>
+	
+	<select id="isDuplicationByUrl" resultType="boolean" parameterType="string">
+		SELECT
+			COUTN(1)
+		FROM
+			`bookmark`
+		WHERE
+			`url` = #{url}
+	</select>
 </mapper>

@@ -59,7 +59,7 @@
 			} 
 			
 			// http:// 또는 https:// 프로토콜
-			if(!(url.startsWith("http://") && url.startsWith("https://"))){
+			if(!(url.startsWith("http://") || url.startsWith("https://"))){
 				alert("정확한 url을 입력하세요");
 				return false;
 			}
@@ -87,12 +87,43 @@
 				}
 			}); // -- ajax
 			
-		}) // -- click
+		}); // -- click
 		
+		// 중복확인
 		$("#urlCheckBtn").on("click", function() {
 			// alert("click");
-			let 
-		});
+			$('#urlStatusArea').empty();
+			
+			let url = $("#url").val().trim();
+			
+			// valildation
+			if(!url){
+				// alert("url");
+				$('#urlStatusArea').append('<span class="text-danger">url이 비어있습니다.</span> ');
+				return;
+			}
+			
+			// ajax
+			$.ajax({
+				// request
+				type: "GET"
+				, url: "/lesson06/is-duplication-url"
+				, data: {"url":url}
+			
+				// response
+				, success: function(data){
+					// 중복일 경우
+					if(data.is_duplication){
+						alert("중복");
+						$('#urlStatusArea').append('<span class="text-danger">url이 중복입니다.</span> ');
+					}
+				, error:function(request, status, error){
+					alert('중복 확인에 실패했습니다.');
+				}
+				
+			}); // -- ajax
+		
+		}); // -- urlCheckBtn
 		
 	}); // -- document
 </script>

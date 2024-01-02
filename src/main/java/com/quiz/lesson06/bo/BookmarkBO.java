@@ -26,4 +26,11 @@ public class BookmarkBO {
 		
 		return bookmarkMapper.selectBookmark();
 	}
+	
+	// input: url
+	// output: boolean
+	public boolean isDuplicationByUrl(String url) {
+		return bookmarkMapper.isDuplicationByUrl(url);
+	}
+	
 }

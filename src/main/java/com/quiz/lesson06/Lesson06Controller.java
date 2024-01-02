@@ -50,7 +50,7 @@ public class Lesson06Controller {
 	}
 	
 	// 즐겨찾기 목록 화면 
-	@GetMapping("/quiz01//bookmark-list")
+	@GetMapping("/quiz01/bookmark-list")
 	public String bookmarkList(
 			Model model) {
 		
@@ -60,6 +60,21 @@ public class Lesson06Controller {
 		model.addAttribute("bookmarkList", bookmarkList);
 		
 		return "lesson06/bookmarkList";
+	}
+	
+	@ResponseBody
+	@GetMapping("/is-duplication-url")
+	public Map<String, Object> isDuplicationUrl(
+			@RequestParam("url") String url){
+		
+		// select
+		boolean isDuplication = bookmarkBO.isDuplicationByUrl(url);
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("code",200);
+		result.put("is_duplication", isDuplication);
+		
+		return result;
 	}
 	
 }
