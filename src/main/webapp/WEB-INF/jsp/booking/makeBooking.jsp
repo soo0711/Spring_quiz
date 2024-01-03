@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>통나무 펜션 - 예약목록</title>
+<title>통나무 펜션 - 예약하기</title>
 <meta charset="utf-8">
 
 <!-- jquery -->
@@ -50,46 +50,31 @@
 					class="nav-link text-white font-weight-bold">예약목록</a></li>
 			</ul>
 		</nav>
-		<section class="list">
-			<h2 class="font-weight-bold text-center py-3">예약 목록 보기</h2>
-			<table class="table text-center">
-				<thead>	
-					<tr>
-						<th>이름</th>
-						<th>예약날짜</th>
-						<th>숙박일수</th>
-						<th>숙박인원</th>
-						<th>전화번호</th>
-						<th>예약상태</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${bookingList }" var="booking">
-					<tr>
-						<td>${booking.name }</td>
-						<td><fmt:formatDate value="${booking.date }" pattern="yyyy년 MM월 dd일"/></td>
-						<td>${booking.day }</td>
-						<td>${booking.headcount }</td>
-						<td>${booking.phoneNumber }</td>
-						<td>
-						<c:choose>
-							<c:when test="${booking.state eq '대기중'}">
-								<span class="text-primary">${booking.state}</span>
-							</c:when>
-							<c:when test="${booking.state eq '확정'}">
-								<span class="text-success">${booking.state}</span>
-							</c:when>
-							<c:when test="${booking.state eq '취소'}">
-								<span class="text-danger">${booking.state}</span>
-							</c:when>
-						</c:choose>
-						</td>
-						<td><button type="button" class="btn btn-danger deleteBtn" data-booking-id="${booking.id }">삭제</button></td>
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+		<section class="list d-flex justify-content-center">
+			<div class="w-50">
+				<h2 class="font-weight-bold py-3">예약하기</h2>
+				<div class="mb-2">
+					<lable for="name">이름</lable>
+					<input type="text" class="form-control" id="name">
+				</div>
+				<div class="mb-2">
+					<lable for="date">예약날짜</lable>
+					<input type="text" class="form-control mt-2" id="date">
+				</div>
+				<div class="mb-2">
+					<lable for="day">숙박일수</lable>
+					<input type="text" class="form-control mt-2" id="day">
+				</div>
+				<div class="mb-2">
+					<lable for="headcount">숙박인원</lable>
+					<input type="text" class="form-control mt-2" id="headcount">
+				</div>
+				<div class="mb-2">
+					<lable for="phoneNumber">전화번호</lable>
+					<input type="text" class="form-control mt-2" id="phoneNumber">
+				</div>
+				<button type="button" id="reserveBtn" class="btn btn-warning w-100">예약하기</button>
+			</div>
 		</section>
 		<footer class="d-flex align-items-center pl-3">
 			<div class="address">
@@ -100,33 +85,75 @@
 	</div>
 <script>
 	$(document).ready(function() {
+		// datepicker
+		$("#date").datepicker({
+			dateFormat: "yy년 mm월 dd일"
+		});
 		
-		$(".deleteBtn").on("click", function() {
-			// alert("click");
-			let id = $(this).data("booking-id");
-			console.log(id);
+		// 예약하기 버튼
+		$("#reserveBtn").on("click", function(){
+			
+			//alert("click");
+			let name = $("#name").val().trim();
+			let date = $("#date").val().trim();
+			let day = $("#day").val().trim();
+			let headcount = $("#headcount").val().trim();
+			let phoneNumber = $("#phoneNumber").val().trim();
+			
+			console.log(name);
+			console.log(date);
+			console.log(day);
+			console.log(headcount);
+			console.log(phoneNumber);
+			
+			// vaildation
+			if (!name){
+				alert("이름을 입력하세요.");
+				return false;
+			}
+			if (!date){
+				alert("예약날짜를 입력하세요.")
+				return false;
+			}
+			if (!day){
+				alert("숙박일수를 입력하세요.")
+				return false;
+			}
+			if (!headcount){
+				alert("숙박인원을 입력하세요.")
+				return false;
+			}
+			if (!phoneNumber){
+				alert("전화번호를 입력하세요.")
+				return false;
+			}
+			
 			
 			$.ajax({
-				type: "delete"
-				, url: "/booking/deleteBooking"
-				, data: {"id": id}
-			
-				, success: function(data){
+				type: "post"
+				, url: "/booking/make-booking"
+				, data: {
+					"name":name, "date":date, "day":day, "headcount":headcount,
+					"phoneNumber":phoneNumber
+				}
+				, success: function(data) {
 					if(data.code == 200){
-						location.reload(true);
-					} else if (data.code == 500) {
-	        			// logic상 error
-	        			alert(data.error_message);
-	        		}
+						location.href="/booking/make-booking-view"
+					} else if (data.code == 500){
+						alert(data.error_message);
+					}
 				}
 				, error: function(request, status, error){
-					alert("삭제를 실패 했습니다.")
+					alert("예약에 실패했습니다.");
+					alert(request);
+					alert(status);
+					alert(error);
 				}
 			}); // - ajax
 			
-		}); // - deleteBtn
+		}); // - reservebtn
 		
-	}); // - document
+	}); // - docu
 </script>
 </body>
 </html>
