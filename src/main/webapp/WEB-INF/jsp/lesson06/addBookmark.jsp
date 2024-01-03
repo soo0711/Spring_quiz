@@ -29,9 +29,9 @@
 		</div>
 		<div class="form-group">
 			<label for="url">url</label>
-			<div class="d-flex">
-			<input type="text" class="form-control col-10" id="url">
-			<button type="button" class="btn btn-info ml-2" id="urlCheckBtn">중복 확인</button>
+			<div class="d-flex"><%--form-inline도 가능 --%>
+				<input type="text" class="form-control col-10" id="url">
+				<button type="button" class="btn btn-info ml-2" id="urlCheckBtn">중복 확인</button>
 			</div>
 			<small id="urlStatusArea">
 			</small>
@@ -69,7 +69,7 @@
 			
 			// ajax
 			$.ajax({
-				type: "post"
+				type: "delete"
 				, url: "/lesson06/quiz01/add-bookmark"
 				, data: {"name":name, "url":url}
 			
@@ -107,18 +107,20 @@
 			// ajax
 			$.ajax({
 				// request
-				type: "GET"
+				type: "POST"
 				, url: "/lesson06/is-duplication-url"
 				, data: {"url":url}
 			
 				// response
 				, success: function(data){
 					// 중복일 경우
-					if(data.is_duplication){
+					if(!data.is_duplication){
 						// alert("중복");
 						$('#urlStatusArea').append('<span class="text-danger">url이 중복입니다.</span> ');
 					} else{
-						$('#urlStatusArea').append('<span class="text-danger">저장 가능한 url 입니다.</span> ');
+						$('#urlStatusArea').append('<span class="text-success">저장 가능한 url 입니다.</span> ');
+						<%--$('#urlStatusArea1').removeClass("d-none")를 없애고--%>
+						<%--$('#urlStatusArea2').addClass("d-none")를 추가하는 방식도 있다.--%>
 					}
 				}
 				, error:function(request, status, error){

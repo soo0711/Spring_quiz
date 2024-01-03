@@ -31,22 +31,23 @@
 			`bookmark`
 	</select>
 	
-	<select id="isDuplicationByUrl" resultType="boolean" parameterType="string">
+	<select id="selectBookmarkListByUrl" resultType="com.quiz.lesson06.domain.Bookmark" parameterType="string">
 		SELECT
-			COUNT(1)
+			`name`
+			,`url`
+			,`createdAt`
+			,`updatedAt`
 		FROM
 			`bookmark`
 		WHERE
 			`url` = #{url}
 	</select>
 	
-	<delete id="deleteBookmarkByNameUrl" parameterType="map">
+	<delete id="deleteBookmarkById" parameterType="int">
 		DELETE
 		FROM
 		 	`bookmark`
 		 WHERE
-		 	`name` = #{name}
-		 AND
-		 	`url` = #{url}
+		 	`id` = #{id}
 	</delete>
 </mapper>

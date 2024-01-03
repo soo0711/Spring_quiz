@@ -35,12 +35,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${bookmarkList }" var="bookmark" varStatus="status">
+				<c:forEach items="${bookmarkList }" var="bookmark">
 					<tr>
-						<td>${status.count }</td>
-						<td class="name">${bookmark.name }</td>
-						<td class="url">${bookmark.url }</td>
-						<td><button type="button" class="deleteBtn btn btn-danger">삭제</button></td>
+						<td>${bookmark.id }</td>
+						<td>${bookmark.name }</td>
+						<td>${bookmark.url }</td>
+						<!-- 1) value 값 넣기 (여러값 세팅 불가) -->
+						<!-- <td><button type="button" class="deleteBtn btn btn-danger" value="${bookmark.id }">삭제</button></td> -->
+						<!-- 2) data로 값 넣기(무조건 소문자, 여러개 넣기 가능) -->
+						<td><button type="button" class="deleteBtn btn btn-danger" data-bookmark-id="${bookmark.id }">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -51,32 +54,38 @@
 	$(document).ready(function() {
 		
 		// 삭제
-		$(".deleteBtn").on("click", function() {
+		$(".deleteBtn").on("click", function(e) {
+			// 1) button value에 담은 값 가져오기
+			// 단점: 여러개의 값을 심어둘때는 이거 가지고 안된다. 단 하나의 값만 가져오기 가능하다.
 			// alert("delete");
-			let deleteBtn = $(this);
-			let tr = deleteBtn.parent().parent();
-		    let td = tr.children();
-			
-		    let name = td.eq(1).text();
-	        let url = td.eq(2).text();
+			// 1. let id = $(this).val();
+			// 2. let id = $(this).attr("value");
+			// 3.let id = e.target.value;
 	
-	        console.log(name);
-	        console.log(url);
+			// 2) data를 이용해서 값을 가져오기
+			// 태그 영역: data-bookmark-id
+			// 스크립트 영역: .data('bookmark-id')로 가져와야한다.
+			let id = $(this).data('bookmark-id');
+	
+	        console.log(id);
 	        
 	        $.ajax({
 	        	// request
-	        	type: "get"
+	        	type: "delete"
 	        	, url: "/lesson06/deleteBookmark"
-	        	, data: {"name":name, "url":url}
+	        	, data: {"id":id}
 	        
 	        	// response
 	        	, success: function(data) {
-	        		if (data.result == "성공"){
-	        			location.href="/lesson06/quiz01/bookmark-list";
+	        		if (data.code == 200){
+	        			location.reload(true); // reload는 그 자리에서 다시 새로고침
+	        		} else if (data.code == 500) {
+	        			// logic상 error
+	        			alert(data.error_message);
 	        		}
 	        	} // -- success
 	        	, error: function(request, status, error) {
-	        		alert("삭제 실패 했습니다.");
+	        		alert("삭제 실패 했습니다. 관리자에게 문의해주세요.");
 	        	} // -- error
 	        	
 	        }) // -- ajax

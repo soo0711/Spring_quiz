@@ -28,14 +28,15 @@ public class BookmarkBO {
 	}
 	
 	// input: url
-	// output: boolean
+	// output: List<Bookmark>
 	public boolean isDuplicationByUrl(String url) {
-		return bookmarkMapper.isDuplicationByUrl(url);
+		List<Bookmark> book = bookmarkMapper.selectBookmarkListByUrl(url);
+		return book.isEmpty()? true: false;
 	}
 	
 	// input: url, name
 	// output: X
-	public void deleteBookmarkByNameUrl(String name, String url) {
-		bookmarkMapper.deleteBookmarkByNameUrl(name, url);
+	public int deleteBookmarkById(int id) {
+		return bookmarkMapper.deleteBookmarkById(id);
 	}
 }

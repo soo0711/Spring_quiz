@@ -22,11 +22,10 @@ public interface BookmarkMapper {
 	
 	// input: url
 	// output: boolean
-	public boolean isDuplicationByUrl(String url);
+	public List<Bookmark> selectBookmarkListByUrl(String url);
 	
 	// input: url, name
 	// output: X
-	public void deleteBookmarkByNameUrl(
-			@Param("name") String name,
-			@Param("url") String url);
+	public int deleteBookmarkById(int id);
 }
+
