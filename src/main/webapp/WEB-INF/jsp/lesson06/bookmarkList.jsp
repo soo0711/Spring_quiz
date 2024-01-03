@@ -31,19 +31,59 @@
 					<th>No.</th>
 					<th>이름</th>
 					<th>주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${bookmarkList }" var="bookmark" varStatus="status">
 					<tr>
 						<td>${status.count }</td>
-						<td>${bookmark.name }</td>
-						<td>${bookmark.url }</td>
+						<td class="name">${bookmark.name }</td>
+						<td class="url">${bookmark.url }</td>
+						<td><button type="button" class="deleteBtn btn btn-danger">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
 	</div>
+<script>
+	$(document).ready(function() {
+		
+		// 삭제
+		$(".deleteBtn").on("click", function() {
+			// alert("delete");
+			let deleteBtn = $(this);
+			let tr = deleteBtn.parent().parent();
+		    let td = tr.children();
+			
+		    let name = td.eq(1).text();
+	        let url = td.eq(2).text();
+	
+	        console.log(name);
+	        console.log(url);
+	        
+	        $.ajax({
+	        	// request
+	        	type: "get"
+	        	, url: "/lesson06/deleteBookmark"
+	        	, data: {"name":name, "url":url}
+	        
+	        	// response
+	        	, success: function(data) {
+	        		if (data.result == "성공"){
+	        			location.href="/lesson06/quiz01/bookmark-list";
+	        		}
+	        	} // -- success
+	        	, error: function(request, status, error) {
+	        		alert("삭제 실패 했습니다.");
+	        	} // -- error
+	        	
+	        }) // -- ajax
+	        
+		}); // -- deleteBtn
+		
+	}); // -- document
+</script>
 </body>
 </html>

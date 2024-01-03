@@ -75,7 +75,7 @@
 			
 				// response - call back 함수
 				, success: function(data){ // data: JSON String => parsing(jquery ajax 함수)
-					alert(data);		   //  => dictionary로 변경 ★★★
+					// alert(data);		   //  => dictionary로 변경 ★★★
 					if(data.code == 200){
 						location.href="/lesson06/quiz01/bookmark-list"
 					}
@@ -88,6 +88,7 @@
 			}); // -- ajax
 			
 		}); // -- click
+		
 		
 		// 중복확인
 		$("#urlCheckBtn").on("click", function() {
@@ -114,9 +115,12 @@
 				, success: function(data){
 					// 중복일 경우
 					if(data.is_duplication){
-						alert("중복");
+						// alert("중복");
 						$('#urlStatusArea').append('<span class="text-danger">url이 중복입니다.</span> ');
+					} else{
+						$('#urlStatusArea').append('<span class="text-danger">저장 가능한 url 입니다.</span> ');
 					}
+				}
 				, error:function(request, status, error){
 					alert('중복 확인에 실패했습니다.');
 				}

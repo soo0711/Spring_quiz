@@ -77,4 +77,19 @@ public class Lesson06Controller {
 		return result;
 	}
 	
+	@ResponseBody
+	@GetMapping("/deleteBookmark")
+	public Map<String, Object> deleteBookmarkByNameUrl(
+			@RequestParam("name") String name,
+			@RequestParam("url") String url){
+		Map<String, Object> result = new HashMap<>();
+		
+		// 삭제
+		bookmarkBO.deleteBookmarkByNameUrl(name, url);
+		// response
+		result.put("code", 200);
+		result.put("result", "성공");
+		return result;
+	}
+	
 }

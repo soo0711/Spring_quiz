@@ -33,10 +33,20 @@
 	
 	<select id="isDuplicationByUrl" resultType="boolean" parameterType="string">
 		SELECT
-			COUTN(1)
+			COUNT(1)
 		FROM
 			`bookmark`
 		WHERE
 			`url` = #{url}
 	</select>
+	
+	<delete id="deleteBookmarkByNameUrl" parameterType="map">
+		DELETE
+		FROM
+		 	`bookmark`
+		 WHERE
+		 	`name` = #{name}
+		 AND
+		 	`url` = #{url}
+	</delete>
 </mapper>

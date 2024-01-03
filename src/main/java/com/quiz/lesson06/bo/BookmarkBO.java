@@ -33,4 +33,9 @@ public class BookmarkBO {
 		return bookmarkMapper.isDuplicationByUrl(url);
 	}
 	
+	// input: url, name
+	// output: X
+	public void deleteBookmarkByNameUrl(String name, String url) {
+		bookmarkMapper.deleteBookmarkByNameUrl(name, url);
+	}
 }
