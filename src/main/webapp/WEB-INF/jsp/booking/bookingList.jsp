@@ -35,8 +35,8 @@
 <body>
 	<div id="wrap" class="container">
 		<header
-			class="bg-light d-flex justify-content-center align-items-center">
-			<div class="display-4">통나무 펜션</div>
+			class="d-flex justify-content-center align-items-center">
+			<div class="display-4"><a href="/booking/check-booking-view" class="text-dark text-decoration-none">통나무 펜션</a></div>
 		</header>
 		<nav>
 			<ul class="nav nav-fill">
@@ -120,7 +120,7 @@
 	        		}
 				}
 				, error: function(request, status, error){
-					alert("삭제를 실패 했습니다.")
+					alert("삭제를 실패 했습니다. 관리자에게 문의해주세요.")
 				}
 			}); // - ajax
 			

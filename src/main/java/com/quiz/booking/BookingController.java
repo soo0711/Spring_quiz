@@ -46,6 +46,26 @@ public class BookingController {
 	}
 	
 	@ResponseBody
+	@RequestMapping("/check-booking")
+	public Map<String, Object> checkBooking(
+			@RequestParam("name") String name,
+			@RequestParam("phoneNumber") String phoneNumber){
+		
+		//select
+		List<Booking> bookingList = bookingBO.getBookingByNamePhoneNumber(name, phoneNumber);
+		// Booking bookingList = bookingBO.getBookingByNamePhoneNumber(name, phoneNumber); 로 하는 방법
+		// booking으로 받는 방법 생각하기
+		
+		// 성공 여부
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		result.put("bookingList", bookingList);
+		
+		return result;
+	}
+	
+	@ResponseBody
 	@DeleteMapping("/deleteBooking")
 	public Map<String, Object> deleteBookingById(
 			@RequestParam("id") int id){
@@ -70,10 +90,11 @@ public class BookingController {
 		return "booking/makeBooking";
 	}
 	
+	@ResponseBody
 	@PostMapping("/make-booking")
 	public Map<String, Object> makeBooking(
 			@RequestParam("name") String name,
-			@RequestParam("date") @DateTimeFormat(pattern = "yyyy년 MM월 dd일") Date date,
+			@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
 			@RequestParam("day") int day,
 			@RequestParam("headcount") int headcount,
 			@RequestParam("phoneNumber") String phoneNumber){

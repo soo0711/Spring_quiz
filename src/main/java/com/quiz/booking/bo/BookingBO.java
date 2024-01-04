@@ -32,4 +32,10 @@ public class BookingBO {
 	public int addBooking(String name, Date date, int day, int headcount, String phoneNumber) {
 		return bookingMapper.addBooking(name, date, day, headcount, phoneNumber);
 	}
+	
+	// int: name, phoneNumber
+	// output: List<Booking>
+	public List<Booking> getBookingByNamePhoneNumber(String name, String phoneNumber){
+		return bookingMapper.selectBookingByNamePhoneNumber(name, phoneNumber);
+	}
 }

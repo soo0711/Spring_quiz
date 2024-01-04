@@ -35,8 +35,8 @@
 <body>
 	<div id="wrap" class="container">
 		<header
-			class="bg-light d-flex justify-content-center align-items-center">
-			<div class="display-4">통나무 펜션</div>
+			class="d-flex justify-content-center align-items-center">
+			<div class="display-4"><a href="/booking/check-booking-view" class="text-dark text-decoration-none">통나무 펜션</a></div>
 		</header>
 		<nav>
 			<ul class="nav nav-fill">
@@ -87,7 +87,8 @@
 	$(document).ready(function() {
 		// datepicker
 		$("#date").datepicker({
-			dateFormat: "yy년 mm월 dd일"
+			dateFormat: "yy-mm-dd"
+			, minDate: 0
 		});
 		
 		// 예약하기 버튼
@@ -138,7 +139,8 @@
 				}
 				, success: function(data) {
 					if(data.code == 200){
-						location.href="/booking/make-booking-view"
+						alert("예약 되었습니다.")
+						location.href="/booking/booking-list-view"
 					} else if (data.code == 500){
 						alert(data.error_message);
 					}
