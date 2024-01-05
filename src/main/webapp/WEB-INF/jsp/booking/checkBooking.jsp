@@ -146,6 +146,7 @@
 			
 				, success: function(data){
 					if (data.code == 200){
+						/* booking List로 여러개 출력
 						let list = data.bookingList;
 						if (list.length > 0){
 							for (let i = 0; i < list.length; i++){
@@ -155,10 +156,21 @@
 									+ "인원: " + list[i].headcount + "\n"
 									+ "상태: " + list[i].state + "\n");
 							}
+							
 						} else{
 							alert("조회된 예약내역이 없습니다.")	
 						}
-					} 
+						*/
+						let booking = data.booking;
+						alert("이름: " + booking.name + "\n"
+								+ "날짜: " + booking.date.slice(0,10) + "\n"
+								+ "일수: " + booking.day + "\n"
+								+ "인원: " + booking.headcount + "\n"
+								+ "상태: " + booking.state + "\n");
+					} else {
+						alert(data.error_message);
+					}
+						
 				}
 				, error: function(request, status, error){
 					alert("조회에 실패했습니다. 관리자에게 문의해주세요.")

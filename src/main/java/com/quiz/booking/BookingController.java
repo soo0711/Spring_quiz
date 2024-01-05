@@ -45,6 +45,7 @@ public class BookingController {
 		return "booking/checkBooking";
 	}
 	
+	/* List 다 받기
 	@ResponseBody
 	@RequestMapping("/check-booking")
 	public Map<String, Object> checkBooking(
@@ -64,6 +65,33 @@ public class BookingController {
 		
 		return result;
 	}
+	*/
+	
+	// List -> Booking 하나 받기
+	@ResponseBody
+	@RequestMapping("/check-booking")
+	public Map<String, Object> checkBooking(
+			@RequestParam("name") String name,
+			@RequestParam("phoneNumber") String phoneNumber){
+		
+		//select
+		Booking booking = bookingBO.getBookingByName(name, phoneNumber);
+		
+		// 성공 여부
+		Map<String, Object> result = new HashMap<>();
+		if (booking == null) {
+			result.put("code", 500);
+			result.put("error_message", "예약내역이 존재하지 않습니다.");
+		} else {
+			result.put("code", 200);
+			result.put("result", "성공");
+			result.put("booking", booking);
+		}
+		return result;
+	}
+	
+	
+	
 	
 	@ResponseBody
 	@DeleteMapping("/deleteBooking")

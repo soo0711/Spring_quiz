@@ -38,4 +38,13 @@ public class BookingBO {
 	public List<Booking> getBookingByNamePhoneNumber(String name, String phoneNumber){
 		return bookingMapper.selectBookingByNamePhoneNumber(name, phoneNumber);
 	}
+	
+	// int: name, phoneNumber
+	// output: Booking
+	// 이렇게 가공을 하는 역할은 BO!!
+	public Booking getBookingByName(String name, String phoneNumber){
+		List<Booking> bookingList = bookingMapper.selectBookingByName(name, phoneNumber);
+		
+		return bookingList.isEmpty()? null : bookingList.get(bookingList.size() - 1);
+	}
 }
