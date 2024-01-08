@@ -18,7 +18,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name="company")
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,7 +26,7 @@ import lombok.ToString;
 public class CompanyEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // 행이 겹치지 않게 구성되어 있다.
 	private int id;
 	
 	private String name;
